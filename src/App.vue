@@ -1,19 +1,18 @@
 <template>
   <div class="app">
     <header class="header">
-      <h1>Python基础课程</h1>
+      <h1>王子一的个人主页</h1>
       <nav class="nav">
         <router-link to="/">首页</router-link>
-        <router-link to="/python-course/basics">基础语法</router-link>
-        <router-link to="/python-course/data-structures">数据结构</router-link>
-        <router-link to="/python-course/functions">函数与模块</router-link>
+        <router-link to="/about">关于我</router-link>
+        <router-link to="/python-course">Python基础课程</router-link>
       </nav>
     </header>
     <main class="main">
       <router-view />
     </main>
     <footer class="footer">
-      <p>© 2026 Python基础课程</p>
+      <p>© 2026 王子一个人主页</p>
     </footer>
   </div>
 </template>

@@ -10,19 +10,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/python-course/basics',
-      name: 'python-basics',
-      component: () => import('../views/PythonBasicsView.vue')
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/python-course/data-structures',
-      name: 'python-data-structures',
-      component: () => import('../views/PythonDataStructuresView.vue')
-    },
-    {
-      path: '/python-course/functions',
-      name: 'python-functions',
-      component: () => import('../views/PythonFunctionsView.vue')
+      path: '/python-course',
+      name: 'python-course',
+      component: () => import('../views/PythonCourseView.vue')
     }
   ]
 })
