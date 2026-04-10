@@ -15,7 +15,7 @@
     
     <div class="course-content">
       <div v-if="activeTab === 'basics'" class="tab-content">
-        <h3>1. 基础语法</h3>
+        <h3>1. Python基础语法</h3>
         
         <section class="topic">
           <h4>1.1 变量和数据类型</h4>
@@ -88,58 +88,107 @@ print(text.replace("Python", "World"))  #   Hello World
         </section>
       </div>
       
-      <div v-if="activeTab === 'control'" class="tab-content">
-        <h3>2. 控制流</h3>
+      <div v-if="activeTab === 'data-structures'" class="tab-content">
+        <h3>2. 数据结构</h3>
         
         <section class="topic">
-          <h4>2.1 条件语句</h4>
+          <h4>2.1 列表 (List)</h4>
           <pre class="code-block">
-# if语句
-age = 18
-if age >= 18:
-    print("成年人")
-elif age >= 13:
-    print("青少年")
-else:
-    print("儿童")
+# 列表定义
+fruits = ["apple", "banana", "cherry"]
 
-# 三元运算符
-s = "成年人" if age >= 18 else "未成年人"
-print(s)
+# 访问元素
+print(fruits[0])  # apple
+print(fruits[-1])  # cherry
+
+# 修改元素
+fruits[1] = "orange"
+print(fruits)  # ['apple', 'orange', 'cherry']
+
+# 列表方法
+fruits.append("grape")  # 添加元素
+print(fruits)  # ['apple', 'orange', 'cherry', 'grape']
+
+fruits.remove("apple")  # 删除元素
+print(fruits)  # ['orange', 'cherry', 'grape']
+
+fruits.sort()  # 排序
+print(fruits)  # ['cherry', 'grape', 'orange']
           </pre>
         </section>
         
         <section class="topic">
-          <h4>2.2 循环语句</h4>
+          <h4>2.2 字典 (Dictionary)</h4>
           <pre class="code-block">
-# for循环
-fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(fruit)
+# 字典定义
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
 
-# 遍历数字范围
-for i in range(5):
-    print(i)  # 0, 1, 2, 3, 4
+# 访问元素
+print(person["name"])  # Alice
+print(person.get("age"))  # 25
 
-# while循环
-count = 0
-while count < 5:
-    print(count)
-    count += 1
+# 修改元素
+person["age"] = 26
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York'}
 
-# break和continue
-for i in range(10):
-    if i == 5:
-        break  # 跳出循环
-    if i % 2 == 0:
-        continue  # 跳过当前循环
-    print(i)
+# 添加元素
+person["job"] = "Engineer"
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York', 'job': 'Engineer'}
+
+# 遍历字典
+for key, value in person.items():
+    print(f"{key}: {value}")
+          </pre>
+        </section>
+        
+        <section class="topic">
+          <h4>2.3 元组 (Tuple)</h4>
+          <pre class="code-block">
+# 元组定义
+colors = ("red", "green", "blue")
+
+# 访问元素
+print(colors[0])  # red
+
+# 元组是不可变的
+# colors[0] = "yellow"  # 会报错
+
+# 元组解包
+a, b, c = colors
+print(a, b, c)  # red green blue
+          </pre>
+        </section>
+        
+        <section class="topic">
+          <h4>2.4 集合 (Set)</h4>
+          <pre class="code-block">
+# 集合定义
+numbers = {1, 2, 3, 4, 5}
+
+# 添加元素
+numbers.add(6)
+print(numbers)  # {1, 2, 3, 4, 5, 6}
+
+# 删除元素
+numbers.remove(3)
+print(numbers)  # {1, 2, 4, 5, 6}
+
+# 集合运算
+a = {1, 2, 3}
+b = {3, 4, 5}
+print(a.union(b))  # {1, 2, 3, 4, 5}
+print(a.intersection(b))  # {3}
+print(a.difference(b))  # {1, 2}
           </pre>
         </section>
       </div>
       
       <div v-if="activeTab === 'functions'" class="tab-content">
-        <h3>3. 函数</h3>
+        <h3>3. 函数与模块</h3>
         
         <section class="topic">
           <h4>3.1 函数定义和调用</h4>
@@ -191,103 +240,38 @@ even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
 print(even_numbers)  # [2, 4]
           </pre>
         </section>
-      </div>
-      
-      <div v-if="activeTab === 'data-structures'" class="tab-content">
-        <h3>4. 数据结构</h3>
         
         <section class="topic">
-          <h4>4.1 列表 (List)</h4>
+          <h4>3.3 模块</h4>
           <pre class="code-block">
-# 列表定义
-fruits = ["apple", "banana", "cherry"]
+# 导入模块
+import math
+print(math.pi)  # 3.141592653589793
+print(math.sqrt(16))  # 4.0
 
-# 访问元素
-print(fruits[0])  # apple
-print(fruits[-1])  # cherry
+# 导入模块中的特定函数
+from math import pi, sqrt
+print(pi)  # 3.141592653589793
+print(sqrt(25))  # 5.0
 
-# 修改元素
-fruits[1] = "orange"
-print(fruits)  # ['apple', 'orange', 'cherry']
+# 导入所有函数
+from math import *
+print(sin(0))  # 0.0
+print(cos(0))  # 1.0
 
-# 列表方法
-fruits.append("grape")  # 添加元素
-print(fruits)  # ['apple', 'orange', 'cherry', 'grape']
+# 创建自己的模块
+# 假设我们有一个名为 my_module.py 的文件
+# 内容如下：
+# def add(a, b):
+#     return a + b
+# 
+# def subtract(a, b):
+#     return a - b
 
-fruits.remove("apple")  # 删除元素
-print(fruits)  # ['orange', 'cherry', 'grape']
-
-fruits.sort()  # 排序
-print(fruits)  # ['cherry', 'grape', 'orange']
-          </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>4.2 字典 (Dictionary)</h4>
-          <pre class="code-block">
-# 字典定义
-person = {
-    "name": "Alice",
-    "age": 25,
-    "city": "New York"
-}
-
-# 访问元素
-print(person["name"])  # Alice
-print(person.get("age"))  # 25
-
-# 修改元素
-person["age"] = 26
-print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York'}
-
-# 添加元素
-person["job"] = "Engineer"
-print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York', 'job': 'Engineer'}
-
-# 遍历字典
-for key, value in person.items():
-    print(f"{key}: {value}")
-          </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>4.3 元组 (Tuple)</h4>
-          <pre class="code-block">
-# 元组定义
-colors = ("red", "green", "blue")
-
-# 访问元素
-print(colors[0])  # red
-
-# 元组是不可变的
-# colors[0] = "yellow"  # 会报错
-
-# 元组解包
-a, b, c = colors
-print(a, b, c)  # red green blue
-          </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>4.4 集合 (Set)</h4>
-          <pre class="code-block">
-# 集合定义
-numbers = {1, 2, 3, 4, 5}
-
-# 添加元素
-numbers.add(6)
-print(numbers)  # {1, 2, 3, 4, 5, 6}
-
-# 删除元素
-numbers.remove(3)
-print(numbers)  # {1, 2, 4, 5, 6}
-
-# 集合运算
-a = {1, 2, 3}
-b = {3, 4, 5}
-print(a.union(b))  # {1, 2, 3, 4, 5}
-print(a.intersection(b))  # {3}
-print(a.difference(b))  # {1, 2}
+# 导入自己的模块
+# import my_module
+# print(my_module.add(10, 5))  # 15
+# print(my_module.subtract(10, 5))  # 5
           </pre>
         </section>
       </div>
@@ -300,10 +284,9 @@ import { ref } from 'vue'
 
 const activeTab = ref('basics')
 const tabs = [
-  { id: 'basics', title: '基础语法' },
-  { id: 'control', title: '控制流' },
-  { id: 'functions', title: '函数' },
-  { id: 'data-structures', title: '数据结构' }
+  { id: 'basics', title: 'Python基础语法' },
+  { id: 'data-structures', title: '数据结构' },
+  { id: 'functions', title: '函数与模块' }
 ]
 </script>
 
