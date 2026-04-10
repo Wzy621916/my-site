@@ -1,30 +1,33 @@
 <template>
   <div class="home">
     <section class="hero">
-      <h2>欢迎来到我的个人主页</h2>
-      <p>这里记录了我的学习历程和个人成长</p>
-      <router-link to="/python-course" class="btn">开始学习Python基础课程</router-link>
+      <h2>欢迎来到Python基础课程</h2>
+      <p>从零开始学习Python编程，掌握基础编程素养</p>
+      <router-link to="/python-course/basics" class="btn">开始学习</router-link>
     </section>
     
     <section class="about">
-      <h3>关于我</h3>
-      <p>我是一名热爱学习的开发者，致力于不断提升自己的技术能力。本网站是我记录学习过程和分享知识的平台。</p>
+      <h3>课程介绍</h3>
+      <p>本课程旨在帮助初学者掌握Python编程的基础知识，包括基础语法、数据结构、函数与模块等核心概念。通过本课程的学习，您将建立扎实的编程基础，为进一步学习Python高级特性和应用开发打下坚实的基础。</p>
     </section>
     
     <section class="features">
-      <h3>网站功能</h3>
+      <h3>课程内容</h3>
       <div class="feature-grid">
         <div class="feature-item">
-          <h4>Python基础课程</h4>
-          <p>从基础语法到数据结构，全面学习Python编程</p>
+          <h4>Python基础语法</h4>
+          <p>学习变量、数据类型、运算符、字符串操作等基本概念</p>
+          <router-link to="/python-course/basics" class="feature-btn">开始学习</router-link>
         </div>
         <div class="feature-item">
-          <h4>学习记录</h4>
-          <p>记录我的学习过程和心得体会</p>
+          <h4>数据结构</h4>
+          <p>掌握列表、字典、元组、集合等常用数据结构</p>
+          <router-link to="/python-course/data-structures" class="feature-btn">开始学习</router-link>
         </div>
         <div class="feature-item">
-          <h4>技术分享</h4>
-          <p>分享我在学习和开发过程中的经验</p>
+          <h4>函数与模块</h4>
+          <p>学习函数定义、Lambda函数、模块导入与使用</p>
+          <router-link to="/python-course/functions" class="feature-btn">开始学习</router-link>
         </div>
       </div>
     </section>
@@ -111,6 +114,9 @@
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .feature-item h4 {
@@ -122,6 +128,24 @@
 .feature-item p {
   color: #666;
   line-height: 1.5;
+  flex-grow: 1;
+}
+
+.feature-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.feature-btn:hover {
+  background-color: #45a049;
 }
 
 @media (max-width: 768px) {
