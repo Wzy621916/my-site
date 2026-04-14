@@ -38,35 +38,100 @@
         <h3>二、Python语言与数据处理核心</h3>
         
         <section class="topic">
-          <h4>2.1 基础语法（快速通关，重在理解）</h4>
+          <h4>2.1 基础语法（适合小白的详细教程）</h4>
           
           <div class="sub-topic">
             <h5>2.1.1 变量与数据类型</h5>
+            <p><strong>什么是变量？</strong>变量就像是一个容器，用来存储数据。在Python中，我们可以用等号（=）来给变量赋值。</p>
             <pre class="code-block">
 # 基本数据类型
+# 字符串（用引号包围的文本）
 name = "Python"  # 字符串
+print(name)  # 输出：Python
+
+# 整数（没有小数点的数字）
 age = 30        # 整数
+print(age)  # 输出：30
+
+# 浮点数（有小数点的数字）
 height = 1.75   # 浮点数
+print(height)  # 输出：1.75
+
+# 布尔值（只有True和False两个值）
 is_student = True  # 布尔值
-
-# 常用数据结构 - 列表
+print(is_student)  # 输出：True
+            </pre>
+            
+            <p><strong>常用数据结构 - 列表</strong>：列表是一种有序的集合，可以存储多个不同类型的元素。</p>
+            <pre class="code-block">
+# 创建列表
 fruits = ["apple", "banana", "cherry"]
-print(fruits[0])  # 访问元素
-fruits.append("grape")  # 添加元素
+print(fruits)  # 输出：['apple', 'banana', 'cherry']
 
-# 常用数据结构 - 字典（特别重要）
+# 访问列表元素（索引从0开始）
+print(fruits[0])  # 输出：apple
+print(fruits[1])  # 输出：banana
+print(fruits[-1])  # 输出：cherry（负索引表示从末尾开始）
+
+# 修改列表元素
+fruits[1] = "orange"
+print(fruits)  # 输出：['apple', 'orange', 'cherry']
+
+# 添加元素
+fruits.append("grape")
+print(fruits)  # 输出：['apple', 'orange', 'cherry', 'grape']
+
+# 删除元素
+fruits.remove("apple")
+print(fruits)  # 输出：['orange', 'cherry', 'grape']
+            </pre>
+            
+            <p><strong>常用数据结构 - 字典（特别重要）</strong>：字典是一种键值对的集合，非常适合存储结构化数据。</p>
+            <pre class="code-block">
+# 创建字典
 person = {
     "name": "Alice",
     "age": 25,
     "city": "New York"
 }
-print(person["name"])  # 访问元素
-person["job"] = "Engineer"  # 添加元素
+print(person)  # 输出：{'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# 访问字典元素（通过键）
+print(person["name"])  # 输出：Alice
+print(person.get("age"))  # 输出：25（使用get方法更安全）
+
+# 修改字典元素
+person["age"] = 26
+print(person)  # 输出：{'name': 'Alice', 'age': 26, 'city': 'New York'}
+
+# 添加新的键值对
+person["job"] = "Engineer"
+print(person)  # 输出：{'name': 'Alice', 'age': 26, 'city': 'New York', 'job': 'Engineer'}
+
+# 遍历字典
+for key, value in person.items():
+    print(f"{key}: {value}")
+# 输出：
+# name: Alice
+# age: 26
+# city: New York
+# job: Engineer
             </pre>
+            
+            <div class="practice">
+              <h6>练习题</h6>
+              <ol>
+                <li>创建一个名为<code>student</code>的字典，包含姓名、年龄、专业三个键值对。</li>
+                <li>向字典中添加一个新的键值对：班级。</li>
+                <li>修改年龄的值。</li>
+                <li>打印出字典中的所有信息。</li>
+              </ol>
+            </div>
           </div>
           
           <div class="sub-topic">
             <h5>2.1.2 控制流程</h5>
+            <p><strong>条件判断</strong>：根据条件决定执行不同的代码块。</p>
             <pre class="code-block">
 # 条件判断
 age = 18
@@ -76,22 +141,120 @@ elif age >= 13:
     print("青少年")
 else:
     print("儿童")
+# 输出：成年人
 
-# 循环
+# 多个条件
+score = 85
+if score >= 90:
+    print("优秀")
+elif score >= 80:
+    print("良好")
+elif score >= 60:
+    print("及格")
+else:
+    print("不及格")
+# 输出：良好
+            </pre>
+            
+            <p><strong>for循环</strong>：用于遍历可迭代对象（如列表、元组、字符串等）。</p>
+            <pre class="code-block">
+# 遍历列表
 fruits = ["apple", "banana", "cherry"]
 for fruit in fruits:
     print(fruit)
+# 输出：
+# apple
+# banana
+# cherry
 
+# 遍历字符串
+word = "Python"
+for letter in word:
+    print(letter)
+# 输出：
+# P
+# y
+# t
+# h
+# o
+# n
+
+# 使用range函数生成数字序列
+for i in range(5):
+    print(i)
+# 输出：
+# 0
+# 1
+# 2
+# 3
+# 4
+
+# range(start, end, step)
+for i in range(1, 10, 2):
+    print(i)
+# 输出：
+# 1
+# 3
+# 5
+# 7
+# 9
+            </pre>
+            
+            <p><strong>while循环</strong>：只要条件为真，就一直执行循环体。</p>
+            <pre class="code-block">
 # while循环
 count = 0
 while count < 5:
     print(count)
-    count += 1
+    count += 1  # 不要忘记更新计数器，否则会陷入无限循环！
+# 输出：
+# 0
+# 1
+# 2
+# 3
+# 4
+
+# 计算1到100的和
+sum = 0
+n = 1
+while n <= 100:
+    sum += n
+    n += 1
+print(f"1到100的和是：{sum}")
+# 输出：1到100的和是：5050
             </pre>
+            
+            <p><strong>break和continue</strong>：控制循环的执行。</p>
+            <pre class="code-block">
+# break：跳出循环
+for i in range(10):
+    if i == 5:
+        break  # 当i等于5时，跳出循环
+    print(i)
+# 输出：0 1 2 3 4
+
+# continue：跳过当前循环，继续下一次循环
+for i in range(10):
+    if i % 2 == 0:
+        continue  # 当i是偶数时，跳过当前循环
+    print(i)
+# 输出：1 3 5 7 9
+            </pre>
+            
+            <div class="practice">
+              <h6>练习题</h6>
+              <ol>
+                <li>使用for循环遍历一个列表，打印出所有元素。</li>
+                <li>使用while循环计算1到50的和。</li>
+                <li>使用if-elif-else语句根据分数等级输出对应的评价。</li>
+                <li>使用break语句，当循环到数字7时跳出循环。</li>
+              </ol>
+            </div>
           </div>
           
           <div class="sub-topic">
             <h5>2.1.3 函数</h5>
+            <p><strong>什么是函数？</strong>函数是一段可重用的代码块，用于执行特定的任务。</p>
             <pre class="code-block">
 # 定义函数
 def greet(name):
@@ -99,22 +262,99 @@ def greet(name):
     return f"Hello, {name}!"
 
 # 调用函数
-print(greet("Alice"))
+result = greet("Alice")
+print(result)  # 输出：Hello, Alice!
 
-# 默认参数
+# 无参数函数
+def say_hello():
+    print("Hello, World!")
+
+say_hello()  # 输出：Hello, World!
+
+# 带默认参数的函数
 def calculate_total(price, tax=0.08):
+    """计算总价（价格 + 税费）"""
     return price * (1 + tax)
 
-print(calculate_total(100))  # 使用默认税率
-print(calculate_total(100, 0.1))  # 自定义税率
+# 使用默认税率
+print(calculate_total(100))  # 输出：108.0
+
+# 自定义税率
+print(calculate_total(100, 0.1))  # 输出：110.0
+
+# 带多个参数的函数
+def add(a, b):
+    return a + b
+
+print(add(3, 5))  # 输出：8
             </pre>
+            
+            <p><strong>可变参数</strong>：可以接受任意数量的参数。</p>
+            <pre class="code-block">
+# 可变参数（*args）
+def sum_numbers(*args):
+    """计算任意数量数字的和"""
+    return sum(args)
+
+print(sum_numbers(1, 2, 3, 4))  # 输出：10
+print(sum_numbers(10, 20, 30))  # 输出：60
+
+# 关键字参数（**kwargs）
+def person_info(**kwargs):
+    """打印个人信息"""
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+person_info(name="Alice", age=25, city="New York")
+# 输出：
+# name: Alice
+# age: 25
+# city: New York
+            </pre>
+            
+            <div class="practice">
+              <h6>练习题</h6>
+              <ol>
+                <li>定义一个函数，接受两个参数，返回它们的乘积。</li>
+                <li>定义一个函数，接受一个列表参数，返回列表中所有元素的和。</li>
+                <li>定义一个带默认参数的函数，计算矩形的面积。</li>
+                <li>使用可变参数定义一个函数，计算任意数量数字的平均值。</li>
+              </ol>
+            </div>
           </div>
           
           <div class="sub-topic">
             <h5>2.1.4 面向对象编程基础</h5>
+            <p><strong>什么是面向对象编程？</strong>面向对象编程（OOP）是一种编程范式，它将数据和操作数据的方法封装在一起。</p>
             <pre class="code-block">
 # 定义类
 class Student:
+    def __init__(self, name, age):
+        """构造函数，初始化对象"""
+        self.name = name  # 实例变量
+        self.age = age
+    
+    def introduce(self):
+        """介绍自己"""
+        return f"我叫{self.name}，今年{self.age}岁"
+
+# 创建对象（实例化）
+student1 = Student("王子一", 20)
+student2 = Student("Alice", 19)
+
+# 调用对象的方法
+print(student1.introduce())  # 输出：我叫王子一，今年20岁
+print(student2.introduce())  # 输出：我叫Alice，今年19岁
+
+# 访问对象的属性
+print(student1.name)  # 输出：王子一
+print(student1.age)  # 输出：20
+            </pre>
+            
+            <p><strong>类的继承</strong>：子类可以继承父类的属性和方法。</p>
+            <pre class="code-block">
+# 父类
+class Person:
     def __init__(self, name, age):
         self.name = name
         self.age = age
@@ -122,33 +362,118 @@ class Student:
     def introduce(self):
         return f"我叫{self.name}，今年{self.age}岁"
 
-# 创建对象
-student = Student("王子一", 20)
-print(student.introduce())
+# 子类（继承Person）
+class Student(Person):
+    def __init__(self, name, age, major):
+        super().__init__(name, age)  # 调用父类的构造函数
+        self.major = major  # 子类特有的属性
+    
+    def introduce(self):
+        # 重写父类的方法
+        return f"我叫{self.name}，今年{self.age}岁，专业是{self.major}"
+
+# 创建学生对象
+student = Student("王子一", 20, "商务数据分析与应用")
+print(student.introduce())  # 输出：我叫王子一，今年20岁，专业是商务数据分析与应用
             </pre>
+            
+            <div class="practice">
+              <h6>练习题</h6>
+              <ol>
+                <li>定义一个<code>Car</code>类，包含品牌、型号、年份等属性，以及一个<code>display_info</code>方法。</li>
+                <li>创建两个<code>Car</code>对象，并调用它们的<code>display_info</code>方法。</li>
+                <li>定义一个<code>ElectricCar</code>子类，继承自<code>Car</code>类，添加电池容量属性。</li>
+              </ol>
+            </div>
           </div>
           
           <div class="sub-topic">
             <h5>2.1.5 文件操作与异常处理</h5>
+            <p><strong>文件操作</strong>：Python提供了内置的文件操作功能。</p>
             <pre class="code-block">
-# 文件操作
 # 写入文件
 with open("data.txt", "w", encoding="utf-8") as f:
-    f.write("Hello, Python!")
+    f.write("Hello, Python!\n")
+    f.write("这是一个测试文件。")
 
 # 读取文件
 with open("data.txt", "r", encoding="utf-8") as f:
     content = f.read()
     print(content)
+# 输出：
+# Hello, Python!
+# 这是一个测试文件。
 
-# 异常处理
-try:
-    result = 10 / 0
-except ZeroDivisionError:
-    print("除数不能为零")
-finally:
-    print("操作完成")
+# 逐行读取
+with open("data.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        print(line.strip())  # strip()去除换行符
+# 输出：
+# Hello, Python!
+# 这是一个测试文件。
+
+# 追加内容
+with open("data.txt", "a", encoding="utf-8") as f:
+    f.write("\n追加的内容。")
+
+# 再次读取
+with open("data.txt", "r", encoding="utf-8") as f:
+    content = f.read()
+    print(content)
+# 输出：
+# Hello, Python!
+# 这是一个测试文件。
+# 追加的内容。
             </pre>
+            
+            <p><strong>异常处理</strong>：处理程序运行过程中可能出现的错误。</p>
+            <pre class="code-block">
+# 基本的异常处理
+try:
+    result = 10 / 0  # 会引发ZeroDivisionError
+except ZeroDivisionError:
+    print("除数不能为零！")
+finally:
+    print("操作完成。")
+# 输出：
+# 除数不能为零！
+# 操作完成。
+
+# 捕获多个异常
+try:
+    num = int(input("请输入一个数字："))
+    result = 10 / num
+    print(f"结果是：{result}")
+except ValueError:
+    print("请输入有效的数字！")
+except ZeroDivisionError:
+    print("除数不能为零！")
+except Exception as e:
+    print(f"发生了未知错误：{e}")
+finally:
+    print("程序结束。")
+            </pre>
+            
+            <div class="practice">
+              <h6>练习题</h6>
+              <ol>
+                <li>创建一个文件，写入你的个人信息。</li>
+                <li>读取并打印该文件的内容。</li>
+                <li>使用异常处理，处理可能出现的文件不存在错误。</li>
+                <li>在文件末尾追加一条新信息。</li>
+              </ol>
+            </div>
+          </div>
+          
+          <div class="learning-tips">
+            <h5>学习提示</h5>
+            <ul>
+              <li><strong>实践是最好的学习方法</strong>：不要只看代码，要自己动手编写和运行。</li>
+              <li><strong>使用注释</strong>：在代码中添加注释，解释代码的功能和逻辑。</li>
+              <li><strong>从小例子开始</strong>：先编写简单的代码，再逐步增加复杂度。</li>
+              <li><strong>使用AI工具</strong>：当遇到问题时，可以向AI工具（如ChatGPT）寻求帮助。</li>
+              <li><strong>保持耐心</strong>：学习编程需要时间，不要急于求成。</li>
+            </ul>
           </div>
         </section>
         
@@ -555,6 +880,72 @@ const tabs = [
   word-wrap: break-word;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.practice {
+  background-color: #e8f5e8;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  border-left: 4px solid #4CAF50;
+}
+
+.practice h6 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  color: #2e7d32;
+}
+
+.practice ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.practice li {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.practice code {
+  background-color: #c8e6c9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+}
+
+.learning-tips {
+  background-color: #e3f2fd;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+  border-left: 4px solid #2196f3;
+}
+
+.learning-tips h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1565c0;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.learning-tips ul {
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.learning-tips li {
+  margin-bottom: 0.8rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.learning-tips strong {
+  color: #1565c0;
 }
 
 @media (max-width: 768px) {
