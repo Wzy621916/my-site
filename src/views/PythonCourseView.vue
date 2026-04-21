@@ -1,982 +1,1066 @@
 <template>
   <div class="python-course">
-    <h2>Python基础课程 - AI时代商务数据分析师学习路径</h2>
-    
-    <div class="course-nav">
-      <button 
-        v-for="tab in tabs" 
-        :key="tab.id"
-        :class="['tab-btn', { active: activeTab === tab.id }]"
-        @click="activeTab = tab.id"
-      >
-        {{ tab.title }}
-      </button>
+    <div class="course-header">
+      <h2>Python基础课程 - AI时代商务数据分析师学习路径</h2>
+      <nav class="course-nav">
+        <router-link to="/" class="nav-link">首页</router-link>
+        <router-link to="/python-course" class="nav-link active">课程章节</router-link>
+        <router-link to="/" class="nav-link">返回个人主页</router-link>
+      </nav>
     </div>
     
-    <div class="course-content">
-      <div v-if="activeTab === 'core-principles'" class="tab-content">
-        <h3>一、核心原则：学习"AI刚需部分"，而非Python全部</h3>
-        
-        <section class="topic">
-          <h4>1.1 学习目标</h4>
-          <p>在AI编程工具日益成熟的今天，学习Python基础的目标不再是成为"全栈开发者"，而是成为"能驾驭AI工具的智能数据分析师"。</p>
-          <p>结合商务数据分析与应用专业和AI辅助编程的时代背景，我们的学习内容必须高度聚焦、精准高效。</p>
-        </section>
-        
-        <section class="topic">
-          <h4>1.2 学习优先级</h4>
-          <ul>
-            <li><strong>第一优先级：</strong>Python语言与数据处理核心（约1-2个月）</li>
-            <li><strong>第二优先级：</strong>理解"够用的数学"，而非精通公式</li>
-            <li><strong>第三优先级：</strong>实战应用：从"调用模型"到"驾驭AI"</li>
-            <li><strong>贯穿始终：</strong>与AI协作的新时代学习法</li>
-          </ul>
-        </section>
-      </div>
+    <div class="course-main">
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <h3>课程导航</h3>
+          <div class="chapter-list">
+            <div 
+              v-for="(chapter, index) in chapters" 
+              :key="index"
+              class="chapter-item"
+              :class="{ active: currentChapter === index }"
+              @click="currentChapter = index"
+            >
+              <div class="chapter-icon">{{ chapter.icon }}</div>
+              <div class="chapter-info">
+                <div class="chapter-title">{{ chapter.title }}</div>
+                <div class="chapter-desc">{{ chapter.description }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
       
-      <div v-if="activeTab === 'python-core'" class="tab-content">
-        <h3>二、Python语言与数据处理核心</h3>
-        
-        <section class="topic">
-          <h4>2.1 基础语法（适合小白的详细教程）</h4>
+      <main class="content-area">
+        <div v-if="currentChapter === 0" class="chapter-page">
+          <h1>{{ chapters[0].title }}</h1>
+          <section class="topic-section">
+            <h3>课程简介</h3>
+            <p>欢迎来到Python基础课程！本课程专为AI时代商务数据分析师设计，帮助您快速掌握Python编程基础。</p>
+          </section>
           
-          <div class="sub-topic">
-            <h5>2.1.1 变量与数据类型</h5>
-            <p><strong>什么是变量？</strong>变量就像是一个容器，用来存储数据。在Python中，我们可以用等号（=）来给变量赋值。</p>
-            <pre class="code-block">
-# 基本数据类型
-# 字符串（用引号包围的文本）
-name = "Python"  # 字符串
-print(name)  # 输出：Python
-
-# 整数（没有小数点的数字）
-age = 30        # 整数
-print(age)  # 输出：30
-
-# 浮点数（有小数点的数字）
-height = 1.75   # 浮点数
-print(height)  # 输出：1.75
-
-# 布尔值（只有True和False两个值）
-is_student = True  # 布尔值
-print(is_student)  # 输出：True
-            </pre>
-            
-            <p><strong>常用数据结构 - 列表</strong>：列表是一种有序的集合，可以存储多个不同类型的元素。</p>
-            <pre class="code-block">
-# 创建列表
-fruits = ["apple", "banana", "cherry"]
-print(fruits)  # 输出：['apple', 'banana', 'cherry']
-
-# 访问列表元素（索引从0开始）
-print(fruits[0])  # 输出：apple
-print(fruits[1])  # 输出：banana
-print(fruits[-1])  # 输出：cherry（负索引表示从末尾开始）
-
-# 修改列表元素
-fruits[1] = "orange"
-print(fruits)  # 输出：['apple', 'orange', 'cherry']
-
-# 添加元素
-fruits.append("grape")
-print(fruits)  # 输出：['apple', 'orange', 'cherry', 'grape']
-
-# 删除元素
-fruits.remove("apple")
-print(fruits)  # 输出：['orange', 'cherry', 'grape']
-            </pre>
-            
-            <p><strong>常用数据结构 - 字典（特别重要）</strong>：字典是一种键值对的集合，非常适合存储结构化数据。</p>
-            <pre class="code-block">
-# 创建字典
-person = {
-    "name": "Alice",
-    "age": 25,
-    "city": "New York"
-}
-print(person)  # 输出：{'name': 'Alice', 'age': 25, 'city': 'New York'}
-
-# 访问字典元素（通过键）
-print(person["name"])  # 输出：Alice
-print(person.get("age"))  # 输出：25（使用get方法更安全）
-
-# 修改字典元素
-person["age"] = 26
-print(person)  # 输出：{'name': 'Alice', 'age': 26, 'city': 'New York'}
-
-# 添加新的键值对
-person["job"] = "Engineer"
-print(person)  # 输出：{'name': 'Alice', 'age': 26, 'city': 'New York', 'job': 'Engineer'}
-
-# 遍历字典
-for key, value in person.items():
-    print(f"{key}: {value}")
-# 输出：
-# name: Alice
-# age: 26
-# city: New York
-# job: Engineer
-            </pre>
-            
-            <div class="practice">
-              <h6>练习题</h6>
-              <ol>
-                <li>创建一个名为<code>student</code>的字典，包含姓名、年龄、专业三个键值对。</li>
-                <li>向字典中添加一个新的键值对：班级。</li>
-                <li>修改年龄的值。</li>
-                <li>打印出字典中的所有信息。</li>
-              </ol>
-            </div>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.1.2 控制流程</h5>
-            <p><strong>条件判断</strong>：根据条件决定执行不同的代码块。</p>
-            <pre class="code-block">
-# 条件判断
-age = 18
-if age >= 18:
-    print("成年人")
-elif age >= 13:
-    print("青少年")
-else:
-    print("儿童")
-# 输出：成年人
-
-# 多个条件
-score = 85
-if score >= 90:
-    print("优秀")
-elif score >= 80:
-    print("良好")
-elif score >= 60:
-    print("及格")
-else:
-    print("不及格")
-# 输出：良好
-            </pre>
-            
-            <p><strong>for循环</strong>：用于遍历可迭代对象（如列表、元组、字符串等）。</p>
-            <pre class="code-block">
-# 遍历列表
-fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(fruit)
-# 输出：
-# apple
-# banana
-# cherry
-
-# 遍历字符串
-word = "Python"
-for letter in word:
-    print(letter)
-# 输出：
-# P
-# y
-# t
-# h
-# o
-# n
-
-# 使用range函数生成数字序列
-for i in range(5):
-    print(i)
-# 输出：
-# 0
-# 1
-# 2
-# 3
-# 4
-
-# range(start, end, step)
-for i in range(1, 10, 2):
-    print(i)
-# 输出：
-# 1
-# 3
-# 5
-# 7
-# 9
-            </pre>
-            
-            <p><strong>while循环</strong>：只要条件为真，就一直执行循环体。</p>
-            <pre class="code-block">
-# while循环
-count = 0
-while count < 5:
-    print(count)
-    count += 1  # 不要忘记更新计数器，否则会陷入无限循环！
-# 输出：
-# 0
-# 1
-# 2
-# 3
-# 4
-
-# 计算1到100的和
-sum = 0
-n = 1
-while n <= 100:
-    sum += n
-    n += 1
-print(f"1到100的和是：{sum}")
-# 输出：1到100的和是：5050
-            </pre>
-            
-            <p><strong>break和continue</strong>：控制循环的执行。</p>
-            <pre class="code-block">
-# break：跳出循环
-for i in range(10):
-    if i == 5:
-        break  # 当i等于5时，跳出循环
-    print(i)
-# 输出：0 1 2 3 4
-
-# continue：跳过当前循环，继续下一次循环
-for i in range(10):
-    if i % 2 == 0:
-        continue  # 当i是偶数时，跳过当前循环
-    print(i)
-# 输出：1 3 5 7 9
-            </pre>
-            
-            <div class="practice">
-              <h6>练习题</h6>
-              <ol>
-                <li>使用for循环遍历一个列表，打印出所有元素。</li>
-                <li>使用while循环计算1到50的和。</li>
-                <li>使用if-elif-else语句根据分数等级输出对应的评价。</li>
-                <li>使用break语句，当循环到数字7时跳出循环。</li>
-              </ol>
-            </div>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.1.3 函数</h5>
-            <p><strong>什么是函数？</strong>函数是一段可重用的代码块，用于执行特定的任务。</p>
-            <pre class="code-block">
-# 定义函数
-def greet(name):
-    """打招呼函数"""
-    return f"Hello, {name}!"
-
-# 调用函数
-result = greet("Alice")
-print(result)  # 输出：Hello, Alice!
-
-# 无参数函数
-def say_hello():
-    print("Hello, World!")
-
-say_hello()  # 输出：Hello, World!
-
-# 带默认参数的函数
-def calculate_total(price, tax=0.08):
-    """计算总价（价格 + 税费）"""
-    return price * (1 + tax)
-
-# 使用默认税率
-print(calculate_total(100))  # 输出：108.0
-
-# 自定义税率
-print(calculate_total(100, 0.1))  # 输出：110.0
-
-# 带多个参数的函数
-def add(a, b):
-    return a + b
-
-print(add(3, 5))  # 输出：8
-            </pre>
-            
-            <p><strong>可变参数</strong>：可以接受任意数量的参数。</p>
-            <pre class="code-block">
-# 可变参数（*args）
-def sum_numbers(*args):
-    """计算任意数量数字的和"""
-    return sum(args)
-
-print(sum_numbers(1, 2, 3, 4))  # 输出：10
-print(sum_numbers(10, 20, 30))  # 输出：60
-
-# 关键字参数（**kwargs）
-def person_info(**kwargs):
-    """打印个人信息"""
-    for key, value in kwargs.items():
-        print(f"{key}: {value}")
-
-person_info(name="Alice", age=25, city="New York")
-# 输出：
-# name: Alice
-# age: 25
-# city: New York
-            </pre>
-            
-            <div class="practice">
-              <h6>练习题</h6>
-              <ol>
-                <li>定义一个函数，接受两个参数，返回它们的乘积。</li>
-                <li>定义一个函数，接受一个列表参数，返回列表中所有元素的和。</li>
-                <li>定义一个带默认参数的函数，计算矩形的面积。</li>
-                <li>使用可变参数定义一个函数，计算任意数量数字的平均值。</li>
-              </ol>
-            </div>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.1.4 面向对象编程基础</h5>
-            <p><strong>什么是面向对象编程？</strong>面向对象编程（OOP）是一种编程范式，它将数据和操作数据的方法封装在一起。</p>
-            <pre class="code-block">
-# 定义类
-class Student:
-    def __init__(self, name, age):
-        """构造函数，初始化对象"""
-        self.name = name  # 实例变量
-        self.age = age
-    
-    def introduce(self):
-        """介绍自己"""
-        return f"我叫{self.name}，今年{self.age}岁"
-
-# 创建对象（实例化）
-student1 = Student("王子一", 20)
-student2 = Student("Alice", 19)
-
-# 调用对象的方法
-print(student1.introduce())  # 输出：我叫王子一，今年20岁
-print(student2.introduce())  # 输出：我叫Alice，今年19岁
-
-# 访问对象的属性
-print(student1.name)  # 输出：王子一
-print(student1.age)  # 输出：20
-            </pre>
-            
-            <p><strong>类的继承</strong>：子类可以继承父类的属性和方法。</p>
-            <pre class="code-block">
-# 父类
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-    
-    def introduce(self):
-        return f"我叫{self.name}，今年{self.age}岁"
-
-# 子类（继承Person）
-class Student(Person):
-    def __init__(self, name, age, major):
-        super().__init__(name, age)  # 调用父类的构造函数
-        self.major = major  # 子类特有的属性
-    
-    def introduce(self):
-        # 重写父类的方法
-        return f"我叫{self.name}，今年{self.age}岁，专业是{self.major}"
-
-# 创建学生对象
-student = Student("王子一", 20, "商务数据分析与应用")
-print(student.introduce())  # 输出：我叫王子一，今年20岁，专业是商务数据分析与应用
-            </pre>
-            
-            <div class="practice">
-              <h6>练习题</h6>
-              <ol>
-                <li>定义一个<code>Car</code>类，包含品牌、型号、年份等属性，以及一个<code>display_info</code>方法。</li>
-                <li>创建两个<code>Car</code>对象，并调用它们的<code>display_info</code>方法。</li>
-                <li>定义一个<code>ElectricCar</code>子类，继承自<code>Car</code>类，添加电池容量属性。</li>
-              </ol>
-            </div>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.1.5 文件操作与异常处理</h5>
-            <p><strong>文件操作</strong>：Python提供了内置的文件操作功能。</p>
-            <pre class="code-block">
-# 写入文件
-with open("data.txt", "w", encoding="utf-8") as f:
-    f.write("Hello, Python!\n")
-    f.write("这是一个测试文件。")
-
-# 读取文件
-with open("data.txt", "r", encoding="utf-8") as f:
-    content = f.read()
-    print(content)
-# 输出：
-# Hello, Python!
-# 这是一个测试文件。
-
-# 逐行读取
-with open("data.txt", "r", encoding="utf-8") as f:
-    for line in f:
-        print(line.strip())  # strip()去除换行符
-# 输出：
-# Hello, Python!
-# 这是一个测试文件。
-
-# 追加内容
-with open("data.txt", "a", encoding="utf-8") as f:
-    f.write("\n追加的内容。")
-
-# 再次读取
-with open("data.txt", "r", encoding="utf-8") as f:
-    content = f.read()
-    print(content)
-# 输出：
-# Hello, Python!
-# 这是一个测试文件。
-# 追加的内容。
-            </pre>
-            
-            <p><strong>异常处理</strong>：处理程序运行过程中可能出现的错误。</p>
-            <pre class="code-block">
-# 基本的异常处理
-try:
-    result = 10 / 0  # 会引发ZeroDivisionError
-except ZeroDivisionError:
-    print("除数不能为零！")
-finally:
-    print("操作完成。")
-# 输出：
-# 除数不能为零！
-# 操作完成。
-
-# 捕获多个异常
-try:
-    num = int(input("请输入一个数字："))
-    result = 10 / num
-    print(f"结果是：{result}")
-except ValueError:
-    print("请输入有效的数字！")
-except ZeroDivisionError:
-    print("除数不能为零！")
-except Exception as e:
-    print(f"发生了未知错误：{e}")
-finally:
-    print("程序结束。")
-            </pre>
-            
-            <div class="practice">
-              <h6>练习题</h6>
-              <ol>
-                <li>创建一个文件，写入你的个人信息。</li>
-                <li>读取并打印该文件的内容。</li>
-                <li>使用异常处理，处理可能出现的文件不存在错误。</li>
-                <li>在文件末尾追加一条新信息。</li>
-              </ol>
-            </div>
-          </div>
-          
-          <div class="learning-tips">
-            <h5>学习提示</h5>
+          <section class="topic-section">
+            <h3>学习目标</h3>
+            <p>在完成本课程后，您将能够：</p>
             <ul>
-              <li><strong>实践是最好的学习方法</strong>：不要只看代码，要自己动手编写和运行。</li>
-              <li><strong>使用注释</strong>：在代码中添加注释，解释代码的功能和逻辑。</li>
-              <li><strong>从小例子开始</strong>：先编写简单的代码，再逐步增加复杂度。</li>
-              <li><strong>使用AI工具</strong>：当遇到问题时，可以向AI工具（如ChatGPT）寻求帮助。</li>
-              <li><strong>保持耐心</strong>：学习编程需要时间，不要急于求成。</li>
+              <li>理解Python基础语法和编程思维</li>
+              <li>掌握常用数据类型和数据结构</li>
+              <li>熟练使用条件判断和循环</li>
+              <li>编写和调用函数</li>
+              <li>处理字符串和文本数据</li>
+              <li>具备数据预处理的编程基础</li>
             </ul>
-          </div>
-        </section>
+          </section>
+
+          <CodeRunner 
+            title="课程开始前的小测试"
+            :initialCode="introCode"
+          />
+        </div>
         
-        <section class="topic">
-          <h4>2.2 AI与数据分析"三剑客"（重中之重，必须熟练）</h4>
+        <div v-else-if="currentChapter === 1" class="chapter-page">
+          <h1>{{ chapters[1].title }}</h1>
           
-          <div class="sub-topic">
-            <h5>2.2.1 NumPy - 数值计算库</h5>
-            <pre class="code-block">
-import numpy as np
+          <section class="topic-section">
+            <h3>什么是变量？</h3>
+            <p>变量是存储数据的容器，就像一个有名字的盒子，我们可以往里面放东西，也可以随时取出或修改里面的内容。</p>
+            <CodeRunner 
+              title="变量定义示例"
+              :initialCode="varCode1"
+            />
+          </section>
 
-# 创建数组
-arr = np.array([1, 2, 3, 4, 5])
-print(arr)
+          <section class="topic-section">
+            <h3>常用数据类型</h3>
+            <p>Python支持多种数据类型，让我们来认识几种最常用的：</p>
+            <div class="type-card">
+              <h4>1. 整数 (Integer)</h4>
+              <p>没有小数部分的数字，可以是正的、负的或零。</p>
+            </div>
+            <div class="type-card">
+              <h4>2. 浮点数 (Float)</h4>
+              <p>带有小数部分的数字，用于表示精度要求较高的数值。</p>
+            </div>
+            <div class="type-card">
+              <h4>3. 字符串 (String)</h4>
+              <p>文本数据，用单引号或双引号括起来。</p>
+            </div>
+            <div class="type-card">
+              <h4>4. 布尔值 (Boolean)</h4>
+              <p>只有两个值：True（真）或 False（假）。</p>
+            </div>
+            <CodeRunner 
+              title="数据类型示例"
+              :initialCode="varCode2"
+            />
+          </section>
 
-# 数组运算
-print(arr + 2)  # 每个元素加2
-print(arr * 2)  # 每个元素乘2
-
-# 多维数组
-matrix = np.array([[1, 2, 3], [4, 5, 6]])
-print(matrix.shape)  # 形状
-print(matrix[0, 1])  # 访问元素
-            </pre>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.2.2 Pandas - 数据处理库（核心）</h5>
-            <pre class="code-block">
-import pandas as pd
-
-# 创建DataFrame
-data = {
-    "name": ["Alice", "Bob", "Charlie"],
-    "age": [25, 30, 35],
-    "city": ["New York", "London", "Paris"]
-}
-df = pd.DataFrame(data)
-print(df)
-
-# 数据读取
-# df = pd.read_csv("data.csv")
-# df = pd.read_excel("data.xlsx")
-
-# 数据清洗
-df.dropna()  # 删除缺失值
-df.drop_duplicates()  # 删除重复值
-
-# 数据筛选
-young_people = df[df["age"] < 30]
-print(young_people)
-
-# 数据分组
-age_group = df.groupby("age").size()
-print(age_group)
-            </pre>
-          </div>
-          
-          <div class="sub-topic">
-            <h5>2.2.3 Matplotlib / Seaborn - 数据可视化库</h5>
-            <pre class="code-block">
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# 折线图
-x = [1, 2, 3, 4, 5]
-y = [2, 4, 6, 8, 10]
-plt.plot(x, y)
-plt.title("折线图")
-plt.xlabel("X轴")
-plt.ylabel("Y轴")
-# plt.show()
-
-# 柱状图
-data = [10, 20, 30, 40, 50]
-labels = ["A", "B", "C", "D", "E"]
-plt.bar(labels, data)
-# plt.show()
-
-# 散点图
-x = [1, 2, 3, 4, 5]
-y = [2, 4, 6, 8, 10]
-plt.scatter(x, y)
-# plt.show()
-            </pre>
-          </div>
-        </section>
-        
-        <section class="topic">
-          <h4>2.3 阶段目标</h4>
-          <p>能独立用Pandas处理一个真实的业务数据集（如销售报表），完成清洗和基本分析，并用图表清晰呈现关键发现。</p>
-        </section>
-      </div>
-      
-      <div v-if="activeTab === 'math'" class="tab-content">
-        <h3>三、关键支撑：理解"够用的数学"，而非精通公式</h3>
-        
-        <section class="topic">
-          <h4>3.1 线性代数核心</h4>
-          <p>理解向量、矩阵、矩阵乘法的意义。因为AI模型底层（如神经网络）本质上是大量的矩阵运算。</p>
-          <pre class="code-block">
-import numpy as np
-
-# 向量
-vector = np.array([1, 2, 3])
-print("向量:", vector)
-
-# 矩阵
-matrix = np.array([[1, 2], [3, 4]])
-print("矩阵:\n", matrix)
-
-# 矩阵乘法
-matrix1 = np.array([[1, 2], [3, 4]])
-matrix2 = np.array([[5, 6], [7, 8]])
-result = np.dot(matrix1, matrix2)
-print("矩阵乘法结果:\n", result)
-            </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>3.2 概率统计核心</h4>
-          <p>理解均值、方差、标准差描述数据分布，理解条件概率和正态分布。</p>
-          <pre class="code-block">
-import numpy as np
-
-# 计算均值、方差、标准差
-data = np.array([1, 2, 3, 4, 5])
-mean = np.mean(data)
-variance = np.var(data)
-std_dev = np.std(data)
-
-print(f"均值: {mean}")
-print(f"方差: {variance}")
-print(f"标准差: {std_dev}")
-
-# 正态分布模拟
-normal_data = np.random.normal(0, 1, 1000)  # 均值为0，标准差为1的正态分布
-print(f"正态分布数据均值: {np.mean(normal_data)}")
-print(f"正态分布数据标准差: {np.std(normal_data)}")
-            </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>3.3 微积分核心</h4>
-          <p>理解导数、偏导数、梯度的直观概念（即"变化率"和"最快上升方向"）。</p>
-          <p>这是理解模型如何通过"梯度下降"算法进行学习和优化的关键。</p>
-        </section>
-      </div>
-      
-      <div v-if="activeTab === 'ai-practice'" class="tab-content">
-        <h3>四、实战应用：从"调用模型"到"驾驭AI"</h3>
-        
-        <section class="topic">
-          <h4>4.1 机器学习入门与Scikit-learn实战（约2个月）</h4>
-          
-          <div class="sub-topic">
-            <h5>4.1.1 经典算法</h5>
+          <section class="topic-section">
+            <h3>变量命名规则</h3>
             <ul>
-              <li>线性回归（预测数值）</li>
-              <li>逻辑回归（分类入门）</li>
-              <li>决策树/随机森林</li>
-              <li>K-Means聚类</li>
+              <li>变量名可以包含字母、数字和下划线（_）</li>
+              <li>变量名不能以数字开头</li>
+              <li>变量名不能使用Python的保留关键字（如if、for等）</li>
+              <li>建议使用有意义的名字，如name、age等</li>
             </ul>
-          </div>
+            <CodeRunner 
+              title="命名规则练习"
+              :initialCode="varCode3"
+            />
+          </section>
+        </div>
+        
+        <div v-else-if="currentChapter === 2" class="chapter-page">
+          <h1>{{ chapters[2].title }}</h1>
           
-          <div class="sub-topic">
-            <h5>4.1.2 核心流程</h5>
-            <pre class="code-block">
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-import pandas as pd
+          <section class="topic-section">
+            <h3>条件判断</h3>
+            <p>条件判断让程序能够根据不同的情况做出不同的响应，就像人生中的选择一样。</p>
+            <CodeRunner 
+              title="if条件判断示例"
+              :initialCode="controlCode1"
+            />
+          </section>
 
-# 加载数据
-# df = pd.read_csv("data.csv")
+          <section class="topic-section">
+            <h3>if-else 语句</h3>
+            <p>如果条件满足，做一件事；否则，做另一件事。</p>
+            <CodeRunner 
+              title="if-else示例"
+              :initialCode="controlCode2"
+            />
+          </section>
 
-# 准备数据
-# X = df[['feature1', 'feature2']]
-# y = df['target']
+          <section class="topic-section">
+            <h3>if-elif-else 多重判断</h3>
+            <p>当有多个条件需要判断时，可以使用elif（else if的缩写）。</p>
+            <CodeRunner 
+              title="多重条件判断示例"
+              :initialCode="controlCode3"
+            />
+          </section>
 
-# 划分训练集和测试集
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+          <section class="topic-section">
+            <h3>for循环</h3>
+            <p>for循环用于遍历可迭代对象（如列表、字符串等）中的每个元素。</p>
+            <CodeRunner 
+              title="for循环示例"
+              :initialCode="controlCode4"
+            />
+          </section>
 
-# 选择模型
-# model = LinearRegression()
-
-# 训练模型
-# model.fit(X_train, y_train)
-
-# 预测
-# y_pred = model.predict(X_test)
-
-# 评估
-# mse = mean_squared_error(y_test, y_pred)
-# print(f"均方误差: {mse}")
-            </pre>
-          </div>
+          <section class="topic-section">
+            <h3>while循环</h3>
+            <p>while循环在条件为True时会一直重复执行代码块。</p>
+            <CodeRunner 
+              title="while循环示例"
+              :initialCode="controlCode5"
+            />
+          </section>
+        </div>
+        
+        <div v-else-if="currentChapter === 3" class="chapter-page">
+          <h1>{{ chapters[3].title }}</h1>
           
-          <div class="sub-topic">
-            <h5>4.1.3 实战项目建议</h5>
+          <section class="topic-section">
+            <h3>什么是函数？</h3>
+            <p>函数是组织好的、可重复使用的代码块，用于执行特定任务。函数就像一个黑盒子，我们给它输入，它给我们输出。</p>
+            <CodeRunner 
+              title="函数定义和调用"
+              :initialCode="funcCode1"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>函数参数</h3>
+            <p>函数可以接受参数，这些参数就像是给函数的输入数据。</p>
+            <CodeRunner 
+              title="带参数的函数"
+              :initialCode="funcCode2"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>返回值</h3>
+            <p>函数可以通过return语句返回结果给调用者。</p>
+            <CodeRunner 
+              title="函数返回值示例"
+              :initialCode="funcCode3"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>默认参数</h3>
+            <p>可以给函数参数设置默认值，这样在调用时如果不传递该参数，就会使用默认值。</p>
+            <CodeRunner 
+              title="默认参数示例"
+              :initialCode="funcCode4"
+            />
+          </section>
+        </div>
+        
+        <div v-else-if="currentChapter === 4" class="chapter-page">
+          <h1>{{ chapters[4].title }}</h1>
+          
+          <section class="topic-section">
+            <h3>列表 (List)</h3>
+            <p>列表是Python中最常用的数据结构之一，它是一个有序的元素集合。</p>
+            <CodeRunner 
+              title="列表操作示例"
+              :initialCode="structCode1"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>字典 (Dictionary)</h3>
+            <p>字典是键值对的集合，每个键都是唯一的，通过键可以快速找到对应的值。</p>
+            <CodeRunner 
+              title="字典操作示例"
+              :initialCode="structCode2"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>元组 (Tuple)</h3>
+            <p>元组和列表类似，但元组是不可变的，创建后不能修改。</p>
+            <CodeRunner 
+              title="元组操作示例"
+              :initialCode="structCode3"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>集合 (Set)</h3>
+            <p>集合是无序且不重复的元素集合。</p>
+            <CodeRunner 
+              title="集合操作示例"
+              :initialCode="structCode4"
+            />
+          </section>
+        </div>
+        
+        <div v-else-if="currentChapter === 5" class="chapter-page">
+          <h1>{{ chapters[5].title }}</h1>
+          
+          <section class="topic-section">
+            <h3>字符串基础</h3>
+            <p>字符串在Python中是非常重要的数据类型，我们经常需要处理文本数据。</p>
+            <CodeRunner 
+              title="字符串定义示例"
+              :initialCode="stringCode1"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>常用字符串方法</h3>
+            <p>Python提供了丰富的字符串处理方法。</p>
+            <CodeRunner 
+              title="字符串方法示例"
+              :initialCode="stringCode2"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>格式化字符串</h3>
+            <p>格式化字符串可以让我们更方便地拼接变量和文本。</p>
+            <CodeRunner 
+              title="字符串格式化示例"
+              :initialCode="stringCode3"
+            />
+          </section>
+        </div>
+        
+        <div v-else-if="currentChapter === 6" class="chapter-page">
+          <h1>{{ chapters[6].title }}</h1>
+          
+          <section class="topic-section">
+            <h3>恭喜完成课程！</h3>
+            <p>您已经完成了Python基础课程的学习！现在让我们通过一个综合练习来巩固所学知识。</p>
+          </section>
+
+          <section class="topic-section">
+            <h3>综合练习：学生成绩管理</h3>
+            <p>让我们用所学知识创建一个简单的学生成绩管理系统。</p>
+            <CodeRunner 
+              title="综合练习"
+              :initialCode="finalCode"
+            />
+          </section>
+
+          <section class="topic-section">
+            <h3>下一步学习建议</h3>
             <ul>
-              <li>鸢尾花分类</li>
-              <li>房价预测</li>
-              <li>销售数据预测</li>
+              <li>学习 NumPy：进行数值计算</li>
+              <li>学习 Pandas：处理表格数据</li>
+              <li>学习 Matplotlib：数据可视化</li>
+              <li>练习实际数据分析项目</li>
             </ul>
-          </div>
-        </section>
-        
-        <section class="topic">
-          <h4>4.2 深度学习初探（可选）</h4>
-          <p>当传统机器学习掌握后，可涉足深度学习。TensorFlow/Keras或PyTorch二选一即可。</p>
-          <p>重点理解神经网络的基本构成、卷积神经网络（CNN）在图像识别中的应用，以及循环神经网络（RNN）在处理序列数据上的思路。</p>
-        </section>
-      </div>
-      
-      <div v-if="activeTab === 'ai-learning'" class="tab-content">
-        <h3>五、贯穿始终的"新时代学习法"：与AI协作</h3>
-        
-        <section class="topic">
-          <h4>5.1 智能辅助</h4>
-          <p>利用如GitHub Copilot等工具，在编写代码时获得自动补全和建议，加速学习过程。</p>
-        </section>
-        
-        <section class="topic">
-          <h4>5.2 交互式学习</h4>
-          <p>在Jupyter Notebook环境中边学边练，即时看到代码结果，这是数据科学领域的标准实践方式。</p>
-          <pre class="code-block">
-# Jupyter Notebook示例
-import pandas as pd
-import matplotlib.pyplot as plt
+          </section>
+        </div>
 
-# 加载数据
-df = pd.read_csv("sales_data.csv")
-
-# 查看数据前几行
-df.head()
-
-# 绘制销售趋势
-plt.plot(df['date'], df['sales'])
-plt.title('销售趋势')
-plt.xlabel('日期')
-plt.ylabel('销售额')
-plt.show()
-            </pre>
-        </section>
-        
-        <section class="topic">
-          <h4>5.3 利用AI解惑</h4>
-          <p>当你遇到不理解的概念、报错或需要代码示例时，可以向AI提问，让它为你解释、调试或生成示例代码。</p>
-        </section>
-      </div>
-      
-      <div v-if="activeTab === 'roadmap'" class="tab-content">
-        <h3>六、学习路线图与时间规划</h3>
-        
-        <section class="topic">
-          <h4>6.1 6-8个月规划（每天投入1-2小时）</h4>
-          <ul>
-            <li><strong>第1-2个月：</strong>攻克Python基础语法和"三剑客"（NumPy, Pandas, Matplotlib），目标能熟练处理数据。</li>
-            <li><strong>第3个月：</strong>学习"够用的数学"核心概念，并与Python代码结合理解。</li>
-            <li><strong>第4-5个月：</strong>学习机器学习基础算法，并用Scikit-learn完成2-3个入门实战项目。</li>
-            <li><strong>第6-8个月：</strong>根据兴趣，选择进入深度学习或深化某个数据分析领域，并完成1-2个高质量的综合项目。</li>
-          </ul>
-        </section>
-        
-        <section class="topic">
-          <h4>6.2 学习建议</h4>
-          <ul>
-            <li>不要盲目追求学习广度，深度掌握数据处理和核心模型原理</li>
-            <li>不要只看不练，跑通一个项目胜过空读十篇教程</li>
-            <li>不要急于求成，跳过基础直接啃深度学习会事倍功半</li>
-            <li>与AI工具协作，提高学习效率</li>
-          </ul>
-        </section>
-      </div>
+        <div class="chapter-navigation">
+          <button 
+            v-if="currentChapter > 0"
+            @click="currentChapter--"
+            class="nav-btn prev-btn"
+          >
+            ← 上一章
+          </button>
+          <button 
+            v-if="currentChapter < chapters.length - 1"
+            @click="currentChapter++"
+            class="nav-btn next-btn"
+          >
+            下一章 →
+          </button>
+        </div>
+      </main>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CodeRunner from '../components/CodeRunner.vue'
 
-const activeTab = ref('core-principles')
-const tabs = [
-  { id: 'core-principles', title: '核心原则' },
-  { id: 'python-core', title: 'Python核心' },
-  { id: 'math', title: '数学基础' },
-  { id: 'ai-practice', title: 'AI实战' },
-  { id: 'ai-learning', title: 'AI协作学习' },
-  { id: 'roadmap', title: '学习路线图' }
+const currentChapter = ref(0)
+
+const chapters = [
+  {
+    title: '课程介绍',
+    description: '了解课程内容和学习目标',
+    icon: '📚'
+  },
+  {
+    title: '变量与数据类型',
+    description: '学习Python基础数据类型',
+    icon: '🔢'
+  },
+  {
+    title: '控制流程',
+    description: '掌握条件判断和循环',
+    icon: '🔄'
+  },
+  {
+    title: '函数',
+    description: '学习定义和使用函数',
+    icon: '⚡'
+  },
+  {
+    title: '数据结构',
+    description: '列表、字典、元组、集合',
+    icon: '📦'
+  },
+  {
+    title: '字符串操作',
+    description: '处理文本数据',
+    icon: '📝'
+  },
+  {
+    title: '总结与练习',
+    description: '综合练习和学习建议',
+    icon: '🎯'
+  }
 ]
+
+const introCode = `# 课程开始前的小测试
+# 请尝试运行这段代码，看看会输出什么
+
+print("欢迎来到Python基础课程！")
+print("让我们开始学习之旅吧！")
+
+# 试试修改下面的数字
+a = 10
+b = 20
+print(f"{a} + {b} = {a + b}")`
+
+const varCode1 = `# 变量定义示例
+
+# 定义变量并赋值
+name = "小王"
+age = 25
+height = 1.75
+is_student = True
+
+# 打印变量
+print("姓名：", name)
+print("年龄：", age)
+print("身高：", height, "米")
+print("是否是学生：", is_student)
+
+# 修改变量值
+age = 26
+print("修改后的年龄：", age)`
+
+const varCode2 = `# 数据类型示例
+
+# 整数
+integer_num = 42
+print("整数：", integer_num, type(integer_num))
+
+# 浮点数
+float_num = 3.14159
+print("浮点数：", float_num, type(float_num))
+
+# 字符串
+greeting = "Hello, Python!"
+print("字符串：", greeting, type(greeting))
+
+# 布尔值
+is_sunny = True
+print("布尔值：", is_sunny, type(is_sunny))
+
+# 类型转换
+num_str = "123"
+num = int(num_str)
+print("字符串转整数：", num, type(num))`
+
+const varCode3 = `# 变量命名规则练习
+
+# 正确的命名方式
+my_name = "张三"
+user_age = 28
+_count = 10
+price1 = 99.9
+
+print("我的名字：", my_name)
+print("用户年龄：", user_age)
+
+# 试试运行下面错误的命名（请注释掉正确的代码，取消下面的注释）
+# 1number = 10  # 不能以数字开头
+# my-name = "abc"  # 不能有连字符
+# class = "Python"  # 不能使用关键字`
+
+const controlCode1 = `# if条件判断示例
+
+age = 18
+
+if age >= 18:
+    print("你已经成年了！")
+    print("可以独立做决定了")
+
+print("程序继续执行...")
+
+# 试试修改age的值看看结果`
+
+const controlCode2 = `# if-else示例
+
+score = 75
+
+if score >= 60:
+    print("恭喜，你及格了！")
+else:
+    print("很遗憾，你需要补考。")
+
+# 试试修改score的值`
+
+const controlCode3 = `# 多重条件判断示例
+
+score = 85
+
+if score >= 90:
+    grade = "优秀"
+elif score >= 80:
+    grade = "良好"
+elif score >= 70:
+    grade = "中等"
+elif score >= 60:
+    grade = "及格"
+else:
+    grade = "不及格"
+
+print(f"分数：{score}，等级：{grade}")
+
+# 试试修改score值`
+
+const controlCode4 = `# for循环示例
+
+# 遍历列表
+fruits = ["苹果", "香蕉", "橙子", "葡萄"]
+print("水果列表：")
+for fruit in fruits:
+    print("-", fruit)
+
+# 计算1到10的和
+sum_total = 0
+for i in range(1, 11):
+    sum_total += i
+print(f"\\n1到10的和：{sum_total}")
+
+# 使用enumerate
+print("\\n带索引的遍历：")
+for index, fruit in enumerate(fruits, 1):
+    print(f"{index}. {fruit}")`
+
+const controlCode5 = `# while循环示例
+
+# 计数
+count = 1
+while count <= 5:
+    print(f"当前计数：{count}")
+    count += 1
+
+# 猜数字游戏
+secret_number = 7
+guess = 0
+print("\\n猜数字游戏（1-10）")
+while guess != secret_number:
+    guess = int(input("请输入你猜的数字："))
+    if guess < secret_number:
+        print("太小了！")
+    elif guess > secret_number:
+        print("太大了！")
+
+print("恭喜你猜对了！")`
+
+const funcCode1 = `# 函数定义和调用示例
+
+# 定义一个简单的问候函数
+def greet():
+    print("你好！")
+    print("欢迎学习Python！")
+
+# 调用函数
+greet()
+greet()  # 可以多次调用`
+
+const funcCode2 = `# 带参数的函数示例
+
+def greet_person(name):
+    print(f"你好，{name}！")
+
+def add(a, b):
+    result = a + b
+    print(f"{a} + {b} = {result}")
+
+# 调用函数
+greet_person("小明")
+greet_person("小红")
+add(3, 5)
+add(10, 20)`
+
+const funcCode3 = `# 函数返回值示例
+
+def add(a, b):
+    return a + b
+
+def calculate_area(width, height):
+    area = width * height
+    return area
+
+# 使用返回值
+sum_result = add(5, 3)
+print("求和结果：", sum_result)
+
+room_area = calculate_area(4, 5)
+print("房间面积：", room_area, "平方米")`
+
+const funcCode4 = `# 默认参数示例
+
+def greet(name, greeting="你好"):
+    print(f"{greeting}，{name}！")
+
+# 使用默认问候语
+greet("小明")
+greet("小红")
+
+# 使用自定义问候语
+greet("小华", "早上好")
+greet("小李", "晚上好")`
+
+const structCode1 = `# 列表操作示例
+
+# 创建列表
+fruits = ["苹果", "香蕉", "橙子"]
+print("原始列表：", fruits)
+
+# 添加元素
+fruits.append("葡萄")
+print("添加后：", fruits)
+
+# 插入元素
+fruits.insert(1, "芒果")
+print("插入后：", fruits)
+
+# 访问元素
+print("第一个元素：", fruits[0])
+print("最后一个元素：", fruits[-1])
+
+# 切片
+print("前3个：", fruits[:3])
+
+# 长度
+print("列表长度：", len(fruits))`
+
+const structCode2 = `# 字典操作示例
+
+# 创建字典
+student = {
+    "name": "张三",
+    "age": 20,
+    "major": "商务数据分析"
+}
+print("学生信息：", student)
+
+# 访问值
+print("姓名：", student["name"])
+print("专业：", student.get("major"))
+
+# 添加键值对
+student["grade"] = "大三"
+print("添加年级后：", student)
+
+# 遍历字典
+print("\\n遍历字典：")
+for key, value in student.items():
+    print(f"{key}: {value}")`
+
+const structCode3 = `# 元组操作示例
+
+# 创建元组
+coordinates = (10, 20)
+print("坐标：", coordinates)
+
+# 访问元组元素
+x, y = coordinates
+print(f"x: {x}, y: {y}")
+
+# 元组是不可变的（不能修改）
+# coordinates[0] = 15  # 这会报错
+
+# 元组的优点：性能好，数据安全
+colors = ("红", "绿", "蓝")
+print("颜色：", colors)
+print("长度：", len(colors))`
+
+const structCode4 = `# 集合操作示例
+
+# 创建集合
+numbers = {1, 2, 3, 4, 5}
+print("集合：", numbers)
+
+# 添加元素
+numbers.add(6)
+print("添加6后：", numbers)
+
+# 自动去重
+numbers.add(3)  # 3已存在，不会变化
+print("去重后：", numbers)
+
+# 集合运算
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+print("交集：", set1 & set2)
+print("并集：", set1 | set2)
+print("差集：", set1 - set2)`
+
+const stringCode1 = `# 字符串定义示例
+
+# 单引号和双引号都可以
+str1 = 'Hello World'
+str2 = "Python编程"
+print(str1)
+print(str2)
+
+# 多行字符串
+str3 = '''这是第一行
+这是第二行
+这是第三行'''
+print("\\n多行字符串：")
+print(str3)
+
+# 字符串拼接
+first = "Hello"
+second = "World"
+combined = first + " " + second
+print("\\n拼接：", combined)
+
+# 字符串重复
+print("重复：", "Python" * 3)`
+
+const stringCode2 = `# 常用字符串方法示例
+
+text = "  Hello, Python Programming!  "
+print("原始：", repr(text))
+
+# 去除空白
+trimmed = text.strip()
+print("去除空白：", repr(trimmed))
+
+# 大小写
+print("大写：", trimmed.upper())
+print("小写：", trimmed.lower())
+print("首字母大写：", trimmed.title())
+
+# 查找和替换
+print("是否包含'Python'：", "Python" in trimmed)
+print("替换：", trimmed.replace("Python", "Java"))
+
+# 分割
+words = trimmed.split()
+print("分割成单词：", words)
+
+# 长度
+print("字符串长度：", len(trimmed))`
+
+const stringCode3 = `# 字符串格式化示例
+
+name = "小明"
+age = 25
+score = 95.5
+
+# 方式1：f-string（推荐）
+print(f"我叫{name}，今年{age}岁，分数{score}")
+
+# 方式2：format方法
+print("我叫{}，今年{}岁，分数{}".format(name, age, score))
+
+# 格式化数字
+print(f"分数保留两位小数：{score:.2f}")
+print(f"百分比：{score/100:.1%}")
+
+# 对齐
+print("左边对齐：{:<10}".format(name))
+print("右边对齐：{:>10}".format(name))
+print("居中对齐：{:^10}".format(name))`
+
+const finalCode = `# 综合练习：学生成绩管理
+
+class GradeManager:
+    def __init__(self):
+        self.students = []
+    
+    def add_student(self, name, scores):
+        student = {
+            "name": name,
+            "scores": scores
+        }
+        self.students.append(student)
+    
+    def calculate_average(self, scores):
+        return sum(scores) / len(scores)
+    
+    def get_student_grade(self, avg_score):
+        if avg_score >= 90:
+            return "优秀"
+        elif avg_score >= 80:
+            return "良好"
+        elif avg_score >= 70:
+            return "中等"
+        elif avg_score >= 60:
+            return "及格"
+        else:
+            return "不及格"
+    
+    def print_report(self):
+        print("=" * 50)
+        print("学生成绩报告")
+        print("=" * 50)
+        for student in self.students:
+            avg = self.calculate_average(student["scores"])
+            grade = self.get_student_grade(avg)
+            print(f"学生：{student['name']}")
+            print(f"成绩：{student['scores']}")
+            print(f"平均分：{avg:.1f}")
+            print(f"等级：{grade}")
+            print("-" * 50)
+
+# 使用成绩管理系统
+manager = GradeManager()
+
+# 添加学生
+manager.add_student("张三", [85, 90, 88, 92])
+manager.add_student("李四", [78, 82, 80, 75])
+manager.add_student("王五", [95, 92, 98, 90])
+manager.add_student("赵六", [55, 60, 58, 62])
+
+# 打印报告
+manager.print_report()`
 </script>
 
 <style scoped>
 .python-course {
-  max-width: 1000px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.python-course h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #333;
-  text-align: center;
+.course-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.course-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .course-nav {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-  overflow-x: auto;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-.tab-btn {
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.course-main {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.sidebar-content {
+  padding: 1.5rem;
+}
+
+.sidebar-content h3 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chapter-item:hover {
+  background: #f5f7fa;
+  transform: translateX(4px);
+}
+
+.chapter-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.chapter-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.chapter-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chapter-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.1rem;
+}
+
+.chapter-desc {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.content-area {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.chapter-page h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #667eea;
+}
+
+.topic-section {
+  margin-bottom: 2rem;
+}
+
+.topic-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #444;
+  font-weight: 600;
+}
+
+.topic-section p {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.topic-section ul {
+  color: #666;
+  line-height: 1.8;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.topic-section li {
+  margin-bottom: 0.5rem;
+}
+
+.type-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  border-left: 4px solid #667eea;
+}
+
+.type-card h4 {
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-size: 1rem;
+}
+
+.type-card p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.nav-btn {
   padding: 0.8rem 1.5rem;
   border: none;
-  background: none;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #666;
-  border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.tab-btn:hover {
+.prev-btn {
+  background: #f0f0f0;
   color: #333;
 }
 
-.tab-btn.active {
-  color: #4CAF50;
-  border-bottom-color: #4CAF50;
+.prev-btn:hover {
+  background: #e0e0e0;
+  transform: translateX(-4px);
 }
 
-.course-content {
-  background-color: #f9f9f9;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.next-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
-.tab-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #333;
+.next-btn:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
 }
 
-.topic {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.topic h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-}
-
-.topic h5 {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  color: #555;
-  margin-top: 1.5rem;
-}
-
-.topic p {
-  margin-bottom: 1rem;
-  color: #666;
-  line-height: 1.6;
-}
-
-.topic ul {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.topic li {
-  margin-bottom: 0.5rem;
-  color: #666;
-}
-
-.sub-topic {
-  margin-bottom: 1.5rem;
-}
-
-.code-block {
-  background-color: #f5f5f5;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.practice {
-  background-color: #e8f5e8;
-  padding: 1rem;
-  border-radius: 6px;
-  margin-top: 1.5rem;
-  border-left: 4px solid #4CAF50;
-}
-
-.practice h6 {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-bottom: 0.8rem;
-  color: #2e7d32;
-}
-
-.practice ol {
-  padding-left: 1.5rem;
-  margin-bottom: 0;
-}
-
-.practice li {
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.practice code {
-  background-color: #c8e6c9;
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85rem;
-}
-
-.learning-tips {
-  background-color: #e3f2fd;
-  padding: 1.5rem;
-  border-radius: 6px;
-  margin-top: 2rem;
-  border-left: 4px solid #2196f3;
-}
-
-.learning-tips h5 {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #1565c0;
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-top: 0;
-}
-
-.learning-tips ul {
-  padding-left: 1.5rem;
-  margin-bottom: 0;
-}
-
-.learning-tips li {
-  margin-bottom: 0.8rem;
-  color: #333;
-  line-height: 1.5;
-}
-
-.learning-tips strong {
-  color: #1565c0;
-}
-
-@media (max-width: 768px) {
-  .python-course h2 {
-    font-size: 1.5rem;
-  }
-  
-  .course-nav {
+@media (max-width: 1024px) {
+  .course-main {
     flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+  }
+  
+  .sidebar-content {
+    padding: 1rem;
+  }
+  
+  .chapter-list {
+    flex-direction: row;
+    overflow-x: auto;
     gap: 0.5rem;
-    border-bottom: none;
-    padding-bottom: 0;
+    padding-bottom: 0.5rem;
   }
   
-  .tab-btn {
-    border-bottom: none;
-    border-left: 3px solid transparent;
-    padding: 0.5rem 1rem;
+  .chapter-item {
+    flex-shrink: 0;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    min-width: 100px;
   }
   
-  .tab-btn.active {
-    border-bottom-color: transparent;
-    border-left-color: #4CAF50;
+  .chapter-icon {
+    font-size: 1.2rem;
   }
   
-  .course-content {
-    padding: 1rem;
+  .chapter-title {
+    font-size: 0.85rem;
   }
   
-  .topic {
-    padding: 1rem;
+  .chapter-desc {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-header {
+    padding: 1.2rem;
+  }
+  
+  .course-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .content-area {
+    padding: 1.2rem;
+  }
+  
+  .chapter-page h1 {
+    font-size: 1.4rem;
   }
 }
 </style>
